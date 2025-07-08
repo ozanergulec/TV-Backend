@@ -31,3 +31,4 @@ C:\Users\casper\SanInternshipProject\TV-Backend\TV-Backend\obj\Debug\net8.0\refi
 C:\Users\casper\SanInternshipProject\TV-Backend\TV-Backend\obj\Debug\net8.0\TV-Backend.pdb
 C:\Users\casper\SanInternshipProject\TV-Backend\TV-Backend\obj\Debug\net8.0\TV-Backend.genruntimeconfig.cache
 C:\Users\casper\SanInternshipProject\TV-Backend\TV-Backend\obj\Debug\net8.0\ref\TV-Backend.dll
+C:\Users\casper\SanInternshipProject\TV-Backend\TV-Backend\obj\Debug\net8.0\TV-Backend.sourcelink.json

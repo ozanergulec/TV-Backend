@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using TV_Backend.Models;
 using Microsoft.Extensions.Configuration;
+using TV_Backend.Models.Login;
 
 namespace TV_Backend.Controllers.Login
 {
