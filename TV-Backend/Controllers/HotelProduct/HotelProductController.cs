@@ -29,8 +29,7 @@ namespace TV_Backend.Controllers.HotelProduct
         // Get Check In Dates
         [HttpPost("get-checkin-dates")]
         public async Task<IActionResult> GetCheckInDates(
-            [FromBody] GetCheckInDatesRequest request,
-            [FromHeader(Name = "Authorization")] string authorization)
+            [FromBody] GetCheckInDatesRequest request)
         {
             var result = await _hotelProductService.GetCheckInDatesAsync(request);
             return Ok(result);
