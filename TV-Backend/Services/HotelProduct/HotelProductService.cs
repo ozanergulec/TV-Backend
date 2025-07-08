@@ -24,5 +24,17 @@ namespace TV_Backend.Services.HotelProduct
             var responseContent = await response.Content.ReadAsStringAsync();
             return System.Text.Json.JsonSerializer.Deserialize<GetArrivalAutocompleteResponse>(responseContent);
         }
+
+        public async Task<GetCheckInDatesResponse?> GetCheckInDatesAsync(GetCheckInDatesRequest request, string token)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Add("Authorization", token);
+            var json = System.Text.Json.JsonSerializer.Serialize(request);
+            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            var response = await client.PostAsync($"{_baseUrl}productservice/getcheckindates", content);
+            response.EnsureSuccessStatusCode();
+            var responseContent = await response.Content.ReadAsStringAsync();
+            return System.Text.Json.JsonSerializer.Deserialize<GetCheckInDatesResponse>(responseContent);
+        }
     }
 }
