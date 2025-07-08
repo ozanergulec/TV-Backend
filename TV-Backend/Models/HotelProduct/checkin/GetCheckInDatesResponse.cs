@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace TV_Backend.Models.HotelProduct
+namespace TV_Backend.Models.HotelProduct.checkin
 {
     public class GetCheckInDatesResponse
     {

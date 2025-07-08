@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using TV_Backend.Models.HotelProduct;
-using TV_Backend.Services.HotelProduct;
-using TV_Backend.Models.Login;
+using TV_Backend.Models.HotelProduct.autoComplete;
+using TV_Backend.Models.HotelProduct.checkin;
+using TV_Backend.Models.HotelProduct.priceSearch;
+using TV_Backend.Services.HotelProduct; 
 
 namespace TV_Backend.Controllers.HotelProduct
 {
@@ -32,6 +34,13 @@ namespace TV_Backend.Controllers.HotelProduct
             [FromBody] GetCheckInDatesRequest request)
         {
             var result = await _hotelProductService.GetCheckInDatesAsync(request);
+            return Ok(result);
+        }
+
+        [HttpPost("price-search")]
+        public async Task<IActionResult> PriceSearch([FromBody] PriceSearchRequest request)
+        {
+            var result = await _hotelProductService.PriceSearchAsync(request);
             return Ok(result);
         }
     }
