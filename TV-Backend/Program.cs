@@ -35,6 +35,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<HotelProductService>(); // <-- Service'i ekle
+builder.Services.AddSingleton<SanTsgTokenService>();
 
 var app = builder.Build();
 
