@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TV-Backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+36cb773f643ac648d2b49928839cdb186f15c97f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+72f1f2d3a7e88f886ace78309c6e9bc3a1484a18")]
 [assembly: System.Reflection.AssemblyProductAttribute("TV-Backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TV-Backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

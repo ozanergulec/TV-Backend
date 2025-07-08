@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace TV_Backend.Models.HotelProduct
 {
@@ -41,7 +42,12 @@ namespace TV_Backend.Models.HotelProduct
 
     public class Geolocation
     {
+        [JsonPropertyName("longitude")]
+        [JsonConverter(typeof(StringToDoubleConverter))]
         public double longitude { get; set; }
+
+        [JsonPropertyName("latitude")]
+        [JsonConverter(typeof(StringToDoubleConverter))]
         public double latitude { get; set; }
     }
 
