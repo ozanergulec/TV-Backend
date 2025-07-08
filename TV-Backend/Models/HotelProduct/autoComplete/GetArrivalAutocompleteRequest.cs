@@ -1,4 +1,4 @@
-namespace TV_Backend.Models.HotelProduct
+namespace TV_Backend.Models.HotelProduct.autoComplete
 {
     public class GetArrivalAutocompleteRequest
     {

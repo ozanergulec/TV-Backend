@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace TV_Backend.Models.HotelProduct
+namespace TV_Backend.Models.HotelProduct.autoComplete
 {
     public class GetArrivalAutocompleteResponse
     {
