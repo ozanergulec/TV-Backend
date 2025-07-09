@@ -1,4 +1,5 @@
 using TV_Backend.Services.HotelProduct;
+using TV_Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,9 +33,13 @@ builder.Services.AddSwaggerGen(c =>
             new string[] {}
         }
     });
+    
+    // Custom schema ID'leri ekle
+    c.CustomSchemaIds(type => type.Name);
 });
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<HotelProductService>(); // <-- Service'i ekle
+builder.Services.AddScoped<GetOffersService>(); // <-- GetOffersService'i ekle
 builder.Services.AddSingleton<SanTsgTokenService>();
 
 var app = builder.Build();
