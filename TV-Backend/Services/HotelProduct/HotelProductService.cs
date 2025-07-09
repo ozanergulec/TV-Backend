@@ -7,6 +7,7 @@ using TV_Backend.Models.HotelProduct.autoComplete;
 using TV_Backend.Models.HotelProduct.checkin;
 using TV_Backend.Models.HotelProduct.priceSearch;
 using TV_Backend.Services;
+using TV_Backend.Models.HotelProduct.getProductInfo;
 
 namespace TV_Backend.Services.HotelProduct
 {
@@ -60,6 +61,19 @@ namespace TV_Backend.Services.HotelProduct
             response.EnsureSuccessStatusCode();
             var responseContent = await response.Content.ReadAsStringAsync();
             return System.Text.Json.JsonSerializer.Deserialize<PriceSearchResponse>(responseContent);
+        }
+
+        public async Task<GetProductResponse?> GetProductInfoAsync(GetProductInfoRequest request)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var token = await _tokenService.GetTokenAsync();
+            client.DefaultRequestHeaders.Add("Authorization", token);
+            var json = JsonSerializer.Serialize(request);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync($"{_baseUrl}productservice/getproductinfo", content);
+            response.EnsureSuccessStatusCode();
+            var responseContent = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<GetProductResponse>(responseContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
     }
 }

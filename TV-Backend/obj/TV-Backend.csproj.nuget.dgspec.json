@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\casper\\SanInternshipProject\\TV-Backend\\TV-Backend\\TV-Backend.csproj": {}
+    "C:\\Users\\linco\\Desktop\\TV-Backend\\TV-Backend\\TV-Backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\casper\\SanInternshipProject\\TV-Backend\\TV-Backend\\TV-Backend.csproj": {
+    "C:\\Users\\linco\\Desktop\\TV-Backend\\TV-Backend\\TV-Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\casper\\SanInternshipProject\\TV-Backend\\TV-Backend\\TV-Backend.csproj",
+        "projectUniqueName": "C:\\Users\\linco\\Desktop\\TV-Backend\\TV-Backend\\TV-Backend.csproj",
         "projectName": "TV-Backend",
-        "projectPath": "C:\\Users\\casper\\SanInternshipProject\\TV-Backend\\TV-Backend\\TV-Backend.csproj",
-        "packagesPath": "C:\\Users\\casper\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\casper\\SanInternshipProject\\TV-Backend\\TV-Backend\\obj\\",
+        "projectPath": "C:\\Users\\linco\\Desktop\\TV-Backend\\TV-Backend\\TV-Backend.csproj",
+        "packagesPath": "C:\\Users\\linco\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\linco\\Desktop\\TV-Backend\\TV-Backend\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\casper\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\linco\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,7 +43,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -73,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
