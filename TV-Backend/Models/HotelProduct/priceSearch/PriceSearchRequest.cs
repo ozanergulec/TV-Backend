@@ -9,42 +9,42 @@ namespace TV_Backend.Models.HotelProduct.priceSearch
 {
     public class PriceSearchRequest
     {
-        public bool checkAllotment { get; set; }
-        public bool checkStopSale { get; set; }
-        [JsonPropertyName("getOnlyDiscountedPrice")]
-        public bool getOnlyDiscountedPrice { get; set; }
-        public bool getOnlyBestOffers { get; set; }
-        public int productType { get; set; }
-        // Opsiyonel yap!
-        public List<ArrivalLocation>? arrivalLocations { get; set; }
-        public List<RoomCriteria> roomCriteria { get; set; }
-        public string nationality { get; set; }
-        public string checkIn { get; set; }
-        public int night { get; set; }
-        public string currency { get; set; }
-        public string culture { get; set; }
-        
-        [JsonPropertyName("Products")]
-        public List<string>? products { get; set; }
-        [JsonPropertyName("productPriceCategories")]
-        public List<ProductPriceCategory>? productPriceCategories { get; set; }
+        public bool CheckAllotment { get; set; }
+        public bool CheckStopSale { get; set; }
+        public bool GetOnlyDiscountedPrice { get; set; }
+        public bool GetOnlyBestOffers { get; set; }
+        public int ProductType { get; set; }
+
+        // Lokasyon için
+        public List<PriceSearchArrivalLocation>? ArrivalLocations { get; set; }
+
+        // Otel(ler) için
+        public List<string>? Products { get; set; }
+        public List<ProductPriceCategory>? ProductPriceCategories { get; set; }
+
+        public List<RoomCriterion> RoomCriteria { get; set; }
+        public string Nationality { get; set; }
+        public string CheckIn { get; set; }
+        public int Night { get; set; }
+        public string Currency { get; set; }
+        public string Culture { get; set; }
     }
 
     public class PriceSearchArrivalLocation
     {
-        public string id { get; set; }
-        public int type { get; set; }
-    }
-
-    public class RoomCriteria
-    {
-        public int adult { get; set; }
-        public List<int>? childAges { get; set; }
+        public string Id { get; set; }
+        public int Type { get; set; }
     }
 
     public class ProductPriceCategory
     {
-        public string product { get; set; }
-        public string category { get; set; }
+        public string Product { get; set; }
+        public string Category { get; set; }
+    }
+
+    public class RoomCriterion
+    {
+        public int Adult { get; set; }
+        public List<int>? ChildAges { get; set; }
     }
 }
