@@ -4,6 +4,7 @@ using TV_Backend.Models.HotelProduct.autoComplete;
 using TV_Backend.Models.HotelProduct.checkin;
 using TV_Backend.Models.HotelProduct.priceSearch;
 using TV_Backend.Services.HotelProduct; 
+using TV_Backend.Models.HotelProduct.getProductInfo;
 
 namespace TV_Backend.Controllers.HotelProduct
 {
@@ -41,6 +42,13 @@ namespace TV_Backend.Controllers.HotelProduct
         public async Task<IActionResult> PriceSearch([FromBody] PriceSearchRequest request)
         {
             var result = await _hotelProductService.PriceSearchAsync(request);
+            return Ok(result);
+        }
+
+        [HttpPost("getProductInfo")]
+        public async Task<IActionResult> GetProductInfo([FromBody] GetProductInfoRequest request)
+        {
+            var result = await _hotelProductService.GetProductInfoAsync(request);
             return Ok(result);
         }
     }
