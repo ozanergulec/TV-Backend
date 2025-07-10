@@ -59,16 +59,20 @@ namespace TV_Backend.Models.HotelProduct.getOffers
 
     public class Room
     {
+        public int PartNo { get; set; }
         public string RoomId { get; set; }
         public string RoomName { get; set; }
+        public List<object> RoomGroups { get; set; }
+        public string AccomId { get; set; }
+        public string AccomName { get; set; }
         public string BoardId { get; set; }
         public string BoardName { get; set; }
         public List<BoardGroup> BoardGroups { get; set; }
+        public int Allotment { get; set; }
         public int StopSaleGuaranteed { get; set; }
         public int StopSaleStandart { get; set; }
-        public List<Traveller> Travellers { get; set; }
-        public string RoomInfoId { get; set; }
-        public object ThirdPartyInformation { get; set; }
+        public RoomPrice Price { get; set; }
+        public List<SimpleTraveller> Travellers { get; set; }
         public bool VisiblePL { get; set; }
     }
 
@@ -90,8 +94,9 @@ namespace TV_Backend.Models.HotelProduct.getOffers
     public class CancellationPolicy
     {
         public string RoomNumber { get; set; }
+        public DateTime BeginDate { get; set; }
         public DateTime DueDate { get; set; }
-        public Price Price { get; set; }
+        public CancellationPrice Price { get; set; }
         public int Provider { get; set; }
     }
 
@@ -138,5 +143,29 @@ namespace TV_Backend.Models.HotelProduct.getOffers
     {
         public int FileType { get; set; }
         public string UrlFull { get; set; }
+    }
+
+    public class RoomPrice
+    {
+        [JsonConverter(typeof(StringToDoubleConverter))]
+        public double OldAmount { get; set; }
+        [JsonConverter(typeof(StringToDoubleConverter))]
+        public double Percent { get; set; }
+        [JsonConverter(typeof(StringToDoubleConverter))]
+        public double Amount { get; set; }
+        public string Currency { get; set; }
+    }
+
+    public class SimpleTraveller
+    {
+        public int Type { get; set; }
+    }
+
+    public class CancellationPrice
+    {
+        [JsonConverter(typeof(StringToDoubleConverter))]
+        public double Percent { get; set; }
+        [JsonConverter(typeof(StringToDoubleConverter))]
+        public double Amount { get; set; }
     }
 }
