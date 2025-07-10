@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using TV_Backend.Models.HotelProduct;
 
 namespace TV_Backend.Models.HotelProduct.getOffers
 {
@@ -51,6 +53,8 @@ namespace TV_Backend.Models.HotelProduct.getOffers
         public string OfferId { get; set; }
         public DateTime CheckIn { get; set; }
         public Price Price { get; set; }
+        public bool OwnOffer { get; set; }
+        public int Provider { get; set; }
     }
 
     public class Room
@@ -79,6 +83,8 @@ namespace TV_Backend.Models.HotelProduct.getOffers
         public int Type { get; set; }
         public int Age { get; set; }
         public string Nationality { get; set; }
+        public int MinAge { get; set; }
+        public int MaxAge { get; set; }
     }
 
     public class CancellationPolicy
@@ -104,6 +110,7 @@ namespace TV_Backend.Models.HotelProduct.getOffers
 
     public class Price
     {
+        [JsonConverter(typeof(StringToDoubleConverter))]
         public double Amount { get; set; }
         public string Currency { get; set; }
     }
@@ -115,7 +122,7 @@ namespace TV_Backend.Models.HotelProduct.getOffers
 
     public class RoomInfo
     {
-        public List<object> BedOptions { get; set; }
+        public List<object> Presentations { get; set; }
         public List<Facility> Facilities { get; set; }
         public List<MediaFile> MediaFiles { get; set; }
         public string Name { get; set; }
