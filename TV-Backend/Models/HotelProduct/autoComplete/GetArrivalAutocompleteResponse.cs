@@ -36,6 +36,7 @@ namespace TV_Backend.Models.HotelProduct.autoComplete
         public Country country { get; set; }
         public State state { get; set; }
         public City city { get; set; }
+        public Hotel hotel { get; set; }
         public GiataInfo giataInfo { get; set; }
         public int provider { get; set; }
     }
@@ -65,6 +66,13 @@ namespace TV_Backend.Models.HotelProduct.autoComplete
 
     public class City
     {
+        public string id { get; set; }
+        public string name { get; set; }
+    }
+
+    public class Hotel
+    {
+        public string internationalName { get; set; }
         public string id { get; set; }
         public string name { get; set; }
     }
