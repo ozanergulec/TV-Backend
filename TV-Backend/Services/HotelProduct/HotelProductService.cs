@@ -17,7 +17,7 @@ namespace TV_Backend.Services.HotelProduct
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly SanTsgTokenService _tokenService;
         private readonly string _baseUrl;
-        private readonly JsonSerializerOptions _jsonOptions; // ✅ JSON options eklendi
+        private readonly JsonSerializerOptions _jsonOptions; 
 
         public HotelProductService(IHttpClientFactory httpClientFactory, SanTsgTokenService tokenService, IConfiguration configuration)
         {
@@ -25,7 +25,7 @@ namespace TV_Backend.Services.HotelProduct
             _tokenService = tokenService;
             _baseUrl = configuration["SanTsgApi:BaseUrl"];
             
-            // ✅ JSON serializer options eklendi
+            // case sensitivity çözümü için
             _jsonOptions = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,
@@ -39,7 +39,7 @@ namespace TV_Backend.Services.HotelProduct
             var token = await _tokenService.GetTokenAsync();
             client.DefaultRequestHeaders.Add("Authorization", token);
             
-            // ✅ JSON options ile serialize
+            
             var json = JsonSerializer.Serialize(request, _jsonOptions);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             
@@ -48,7 +48,7 @@ namespace TV_Backend.Services.HotelProduct
             
             var responseContent = await response.Content.ReadAsStringAsync();
             
-            // ✅ JSON options ile deserialize - bu en önemli kısım
+            // deserialize için
             return JsonSerializer.Deserialize<GetArrivalAutocompleteResponse>(responseContent, _jsonOptions);
         }
 
