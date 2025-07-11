@@ -41,6 +41,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddScoped<HotelProductService>(); // <-- Service'i ekle
 builder.Services.AddScoped<GetOffersService>(); // <-- GetOffersService'i ekle
 builder.Services.AddScoped<LookupService>();
+builder.Services.AddScoped<GetOfferDetailsService>();
 builder.Services.AddSingleton<SanTsgTokenService>();
 
 var app = builder.Build();

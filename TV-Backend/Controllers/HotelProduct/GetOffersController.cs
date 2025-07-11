@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using TV_Backend.Models.HotelProduct.getOffers;
 using TV_Backend.Services.HotelProduct;
+using System.Text.Json.Serialization;
 
 namespace TV_Backend.Controllers.HotelProduct
 {
