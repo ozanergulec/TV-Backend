@@ -41,7 +41,9 @@ builder.Services.AddHttpClient();
 builder.Services.AddScoped<HotelProductService>(); 
 builder.Services.AddScoped<GetOffersService>(); 
 builder.Services.AddScoped<LookupService>();
+builder.Services.AddScoped<GetOfferDetailsService>();
 builder.Services.AddSingleton<SanTsgTokenService>(); //login işlemininin sürekli yapılmamsı için
+
 
 var app = builder.Build();
 
