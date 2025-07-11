@@ -27,7 +27,7 @@ namespace TV_Backend.Controllers.Login
         {
             var client = _httpClientFactory.CreateClient();
 
-            // Artık base URL'i appsettings.json'dan alıyoruz
+            //  base URL appsettings.json'dan 
             var apiUrl = $"{_sanTsgApiBaseUrl}authenticationservice/login";
 
             // Request'i JSON'a çevir

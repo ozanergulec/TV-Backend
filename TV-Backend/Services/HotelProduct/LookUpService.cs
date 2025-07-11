@@ -34,7 +34,7 @@ namespace TV_Backend.Services.HotelProduct
             var token = await _tokenService.GetTokenAsync();
             client.DefaultRequestHeaders.Add("Authorization", token);
             
-            // Boş JSON object gönder
+            // Boş JSON object 
             var content = new StringContent("{}", Encoding.UTF8, "application/json");
             var response = await client.PostAsync($"{_baseUrl}lookupservice/getnationalities", content);
             response.EnsureSuccessStatusCode();
@@ -50,7 +50,7 @@ namespace TV_Backend.Services.HotelProduct
             var token = await _tokenService.GetTokenAsync();
             client.DefaultRequestHeaders.Add("Authorization", token);
             
-            // Boş JSON object gönder
+            // Boş JSON object 
             var content = new StringContent("{}", Encoding.UTF8, "application/json");
             var response = await client.PostAsync($"{_baseUrl}lookupservice/getcurrencies", content);
             response.EnsureSuccessStatusCode();

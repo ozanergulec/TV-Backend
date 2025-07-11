@@ -6,7 +6,7 @@ namespace TV_Backend.Models.HotelProduct.checkin
     {
         public int ProductType { get; set; }
         public bool IncludeSubLocations { get; set; }
-        public object? Product { get; set; } // null gönderilebiliyor
+        public object? Product { get; set; } 
         public List<ArrivalLocation> ArrivalLocations { get; set; }
     }
 

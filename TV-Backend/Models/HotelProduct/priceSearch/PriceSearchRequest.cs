@@ -18,7 +18,7 @@ namespace TV_Backend.Models.HotelProduct.priceSearch
         // Lokasyon için
         public List<PriceSearchArrivalLocation>? ArrivalLocations { get; set; }
 
-        // Otel(ler) için
+        // Oteller için
         public List<string>? Products { get; set; }
         public List<ProductPriceCategory>? ProductPriceCategories { get; set; }
 

@@ -254,10 +254,26 @@ namespace TV_Backend.Models.HotelProduct.priceSearch
     }
 
 
-    public class Location { public string name { get; set; } public string countryId { get; set; } public int provider { get; set; } public bool isTopRegion { get; set; } public bool ownLocation { get; set; } public string id { get; set; } }
-    public class Badge { public string id { get; set; } public string name { get; set; } }
-    public class HotelCategory { public string name { get; set; } public string id { get; set; } public string code { get; set; } }
-    public class ThirdPartyInformation { public List<object> infos { get; set; } }
+    public class Location { 
+        public string name { get; set; }
+        public string countryId { get; set; } 
+        public int provider { get; set; } 
+        public bool isTopRegion { get; set; } 
+        public bool ownLocation { get; set; } 
+        public string id { get; set; } }
+     
+     public class Badge { 
+        public string id { get; set; }
+        public string name { get; set; } }
+
+    public class HotelCategory { 
+        public string name { get; set; } 
+        public string id { get; set; } 
+        public string code { get; set; } }
+
+    public class ThirdPartyInformation { 
+        public List<object> infos { get; set; } }
+
     public class BoardGroup 
     { 
         [JsonPropertyName("id")]
