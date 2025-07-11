@@ -38,10 +38,10 @@ builder.Services.AddSwaggerGen(c =>
     c.CustomSchemaIds(type => type.Name);
 });
 builder.Services.AddHttpClient();
-builder.Services.AddScoped<HotelProductService>(); // <-- Service'i ekle
-builder.Services.AddScoped<GetOffersService>(); // <-- GetOffersService'i ekle
+builder.Services.AddScoped<HotelProductService>(); 
+builder.Services.AddScoped<GetOffersService>(); 
 builder.Services.AddScoped<LookupService>();
-builder.Services.AddSingleton<SanTsgTokenService>();
+builder.Services.AddSingleton<SanTsgTokenService>(); //login işlemininin sürekli yapılmamsı için
 
 var app = builder.Build();
 
