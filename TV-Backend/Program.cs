@@ -44,8 +44,8 @@ builder.Services.AddScoped<GetOffersService>();
 builder.Services.AddScoped<LookupService>();
 builder.Services.AddScoped<GetOfferDetailsService>();
 builder.Services.AddScoped<IBeginTransactionService, BeginTransactionService>(); // BeginTransaction service için
+builder.Services.AddScoped<ISetReservationInfoService, SetReservationInfoService>(); // SetReservationInfo service eklendi
 builder.Services.AddSingleton<SanTsgTokenService>(); //login işlemininin sürekli yapılması için
-
 
 var app = builder.Build();
 
@@ -59,8 +59,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
-
 
 app.MapControllers();
 
