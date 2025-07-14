@@ -7,8 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TV_Backend.Models.Login;
 using TV_Backend.Services;
-using TV_Backend.Models.Login;
-
 public class SanTsgTokenService
 {
     private readonly IHttpClientFactory _httpClientFactory;

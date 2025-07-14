@@ -1,5 +1,6 @@
 using TV_Backend.Services.HotelProduct;
 using TV_Backend.Services;
+using TV_Backend.Services.Booking;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,7 +43,8 @@ builder.Services.AddScoped<HotelProductService>();
 builder.Services.AddScoped<GetOffersService>(); 
 builder.Services.AddScoped<LookupService>();
 builder.Services.AddScoped<GetOfferDetailsService>();
-builder.Services.AddSingleton<SanTsgTokenService>(); //login işlemininin sürekli yapılmamsı için
+builder.Services.AddScoped<IBeginTransactionService, BeginTransactionService>(); // BeginTransaction service için
+builder.Services.AddSingleton<SanTsgTokenService>(); //login işlemininin sürekli yapılması için
 
 
 var app = builder.Build();
