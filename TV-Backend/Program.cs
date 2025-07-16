@@ -43,17 +43,12 @@ builder.Services.AddScoped<HotelProductService>();
 builder.Services.AddScoped<GetOffersService>(); 
 builder.Services.AddScoped<LookupService>();
 builder.Services.AddScoped<GetOfferDetailsService>();
-<<<<<<< Updated upstream
-builder.Services.AddScoped<IBeginTransactionService, BeginTransactionService>(); // BeginTransaction service için
-builder.Services.AddScoped<ISetReservationInfoService, SetReservationInfoService>(); // SetReservationInfo service eklendi
-builder.Services.AddScoped<ICommitTransactionService, CommitTransactionService>(); // CommitTransaction service eklendi
-builder.Services.AddSingleton<SanTsgTokenService>(); //login işlemininin sürekli yapılması için
-=======
+
 builder.Services.AddScoped<IBeginTransactionService, BeginTransactionService>();
 builder.Services.AddScoped<ISetReservationInfoService, SetReservationInfoService>();
 builder.Services.AddScoped<GetReservationDetailService>();
 builder.Services.AddSingleton<SanTsgTokenService>(); //login işlemininin sürekli yapılmaması için
->>>>>>> Stashed changes
+
 
 var app = builder.Build();
 
