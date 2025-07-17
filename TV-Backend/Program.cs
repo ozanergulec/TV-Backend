@@ -51,7 +51,7 @@ builder.Services.AddScoped<IBeginTransactionService, BeginTransactionService>();
 builder.Services.AddScoped<ISetReservationInfoService, SetReservationInfoService>();
 builder.Services.AddScoped<GetReservationDetailService>();
 
-// ✅ Token Service Interface Registration
+// Token Service Interface Registration
 builder.Services.AddSingleton<ISanTsgTokenService, SanTsgTokenService>();
 
 var app = builder.Build();
