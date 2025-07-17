@@ -12,9 +12,9 @@ namespace TV_Backend.Services.Booking
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IConfiguration _configuration;
-        private readonly SanTsgTokenService _tokenService;
+        private readonly ISanTsgTokenService _tokenService;
 
-        public GetReservationDetailService(IHttpClientFactory httpClientFactory, IConfiguration configuration, SanTsgTokenService tokenService)
+        public GetReservationDetailService(IHttpClientFactory httpClientFactory, IConfiguration configuration, ISanTsgTokenService tokenService)
         {
             _httpClientFactory = httpClientFactory;
             _configuration = configuration;
