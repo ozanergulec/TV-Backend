@@ -1,0 +1,31 @@
+name: Docker CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main  
+  pull_request:
+    branches:
+      - main  
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      
+      - name: Build Docker image
+        run: |
+          docker build -t mervecetin904/tv-backend .
+
+      
+      - name: Push Docker image to Docker Hub
+        run: |
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker tag mervecetin904/tv-backend mervecetin904/tv-backend:latest
+          docker push mervecetin904/tv-backend:latest
+
