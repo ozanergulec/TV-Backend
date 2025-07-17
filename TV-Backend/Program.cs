@@ -38,7 +38,10 @@ builder.Services.AddSwaggerGen(c =>
     // Custom schema ID'leri ekle
     c.CustomSchemaIds(type => type.Name);
 });
+
 builder.Services.AddHttpClient();
+
+// ✅ Service Registrations with Interfaces
 builder.Services.AddScoped<HotelProductService>(); 
 builder.Services.AddScoped<GetOffersService>(); 
 builder.Services.AddScoped<LookupService>();
@@ -47,8 +50,9 @@ builder.Services.AddScoped<GetOfferDetailsService>();
 builder.Services.AddScoped<IBeginTransactionService, BeginTransactionService>();
 builder.Services.AddScoped<ISetReservationInfoService, SetReservationInfoService>();
 builder.Services.AddScoped<GetReservationDetailService>();
-builder.Services.AddSingleton<SanTsgTokenService>(); //login işlemininin sürekli yapılmaması için
 
+// ✅ Token Service Interface Registration
+builder.Services.AddSingleton<ISanTsgTokenService, SanTsgTokenService>();
 
 var app = builder.Build();
 

@@ -1,6 +1,7 @@
 using System.Text;
 using System.Text.Json;
 using TV_Backend.Models.Booking.BeginTransaction;
+using TV_Backend.Services;
 
 namespace TV_Backend.Services.Booking
 {
@@ -13,11 +14,11 @@ namespace TV_Backend.Services.Booking
     public class BeginTransactionService : IBeginTransactionService
     {
         private readonly HttpClient _httpClient;
-        private readonly SanTsgTokenService _tokenService;
+        private readonly ISanTsgTokenService _tokenService;
         private readonly string _baseUrl;
         private readonly JsonSerializerOptions _jsonOptions;
 
-        public BeginTransactionService(HttpClient httpClient, SanTsgTokenService tokenService, IConfiguration configuration)
+        public BeginTransactionService(HttpClient httpClient, ISanTsgTokenService tokenService, IConfiguration configuration)
         {
             _httpClient = httpClient;
             _tokenService = tokenService;
