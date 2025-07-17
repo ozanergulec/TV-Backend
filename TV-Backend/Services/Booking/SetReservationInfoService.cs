@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using TV_Backend.Models.Booking.SetReservationInfo;
+using TV_Backend.Services;
 
 namespace TV_Backend.Services.Booking
 {
@@ -15,7 +16,7 @@ namespace TV_Backend.Services.Booking
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IConfiguration _configuration;
-        private readonly SanTsgTokenService _tokenService;
+        private readonly ISanTsgTokenService _tokenService;
 
         private readonly JsonSerializerOptions _jsonOptions = new()
         {
@@ -27,7 +28,7 @@ namespace TV_Backend.Services.Booking
         public SetReservationInfoService(
             IHttpClientFactory httpClientFactory,
             IConfiguration configuration,
-            SanTsgTokenService tokenService)
+            ISanTsgTokenService tokenService)
         {
             _httpClientFactory = httpClientFactory;
             _configuration = configuration;
