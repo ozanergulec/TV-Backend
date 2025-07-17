@@ -49,6 +49,7 @@ builder.Services.AddScoped<GetOfferDetailsService>();
 
 builder.Services.AddScoped<IBeginTransactionService, BeginTransactionService>();
 builder.Services.AddScoped<ISetReservationInfoService, SetReservationInfoService>();
+builder.Services.AddScoped<ICommitTransactionService, CommitTransactionService>();
 builder.Services.AddScoped<GetReservationDetailService>();
 
 // Token Service Interface Registration
