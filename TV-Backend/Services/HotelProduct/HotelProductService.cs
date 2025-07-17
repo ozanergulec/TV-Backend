@@ -15,11 +15,11 @@ namespace TV_Backend.Services.HotelProduct
     public class HotelProductService
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly SanTsgTokenService _tokenService;
+        private readonly ISanTsgTokenService _tokenService;
         private readonly string _baseUrl;
         private readonly JsonSerializerOptions _jsonOptions; 
 
-        public HotelProductService(IHttpClientFactory httpClientFactory, SanTsgTokenService tokenService, IConfiguration configuration)
+        public HotelProductService(IHttpClientFactory httpClientFactory, ISanTsgTokenService tokenService, IConfiguration configuration)
         {
             _httpClientFactory = httpClientFactory;
             _tokenService = tokenService;

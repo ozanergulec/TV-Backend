@@ -12,10 +12,10 @@ namespace TV_Backend.Services.HotelProduct
     {
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
-        private readonly SanTsgTokenService _tokenService;
+        private readonly ISanTsgTokenService _tokenService;
         private readonly string _baseUrl;
 
-        public GetOfferDetailsService(HttpClient httpClient, IConfiguration configuration, SanTsgTokenService tokenService)
+        public GetOfferDetailsService(HttpClient httpClient, IConfiguration configuration, ISanTsgTokenService tokenService)
         {
             _httpClient = httpClient;
             _configuration = configuration;

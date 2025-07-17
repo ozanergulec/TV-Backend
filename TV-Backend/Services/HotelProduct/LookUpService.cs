@@ -12,11 +12,11 @@ namespace TV_Backend.Services.HotelProduct
     public class LookupService
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly SanTsgTokenService _tokenService;
+        private readonly ISanTsgTokenService _tokenService;
         private readonly string _baseUrl;
         private readonly JsonSerializerOptions _jsonOptions;
 
-        public LookupService(IHttpClientFactory httpClientFactory, SanTsgTokenService tokenService, IConfiguration configuration)
+        public LookupService(IHttpClientFactory httpClientFactory, ISanTsgTokenService tokenService, IConfiguration configuration)
         {
             _httpClientFactory = httpClientFactory;
             _tokenService = tokenService;

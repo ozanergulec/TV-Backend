@@ -19,7 +19,7 @@ namespace TV_Backend.Tests.Services.Booking
 {
     public class CommitTransactionServiceTests
     {
-        private readonly Mock<IHttpClientFactody> _httpClientFactoryMock;
+        private readonly Mock<IHttpClientFactory> _httpClientFactoryMock;
         private readonly Mock<IConfiguration> _configurationMock;
         private readonly Mock<ISanTsgTokenService> _tokenServiceMock;
         private readonly Mock<HttpMessageHandler> _httpMessageHandlerMock;
