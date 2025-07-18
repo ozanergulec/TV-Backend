@@ -41,7 +41,13 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddHttpClient();
 
-// ✅ Service Registrations with Interfaces
+// Redis Cache Registration
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetValue<string>("Redis:ConnectionString");
+});
+
+// Service Registrations 
 builder.Services.AddScoped<HotelProductService>(); 
 builder.Services.AddScoped<GetOffersService>(); 
 builder.Services.AddScoped<LookupService>();

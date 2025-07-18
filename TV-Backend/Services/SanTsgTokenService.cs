@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Caching.Distributed;
 using TV_Backend.Models.Login;
 
 namespace TV_Backend.Services
@@ -13,20 +13,33 @@ namespace TV_Backend.Services
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IConfiguration _configuration;
-        private string? _token;
-        private DateTime _expiresOn;
+        private readonly IDistributedCache _distributedCache;
+        
+        private const string CACHE_KEY = "san_tsg_token";
 
-        public SanTsgTokenService(IHttpClientFactory httpClientFactory, IConfiguration configuration)
+        public SanTsgTokenService(
+            IHttpClientFactory httpClientFactory, 
+            IConfiguration configuration,
+            IDistributedCache distributedCache)
         {
             _httpClientFactory = httpClientFactory;
             _configuration = configuration;
+            _distributedCache = distributedCache;
         }
 
         public async Task<string> GetTokenAsync()
         {
-            if (_token != null && DateTime.Now < _expiresOn)
-                return _token;
+            // Redis'ten token kontrol et
+            var cachedToken = await _distributedCache.GetStringAsync(CACHE_KEY);
+            if (!string.IsNullOrEmpty(cachedToken))
+                return cachedToken;
 
+            // Yoksa yeni token al ve cache'le
+            return await RefreshTokenAsync();
+        }
+
+        private async Task<string> RefreshTokenAsync()
+        {
             var loginRequest = new
             {
                 Agency = _configuration["SanTsgApi:Agency"],
@@ -42,10 +55,16 @@ namespace TV_Backend.Services
             var responseContent = await response.Content.ReadAsStringAsync();
 
             var loginResponse = JsonSerializer.Deserialize<LoginResponse>(responseContent);
+            var token = "Bearer " + loginResponse.body.token;
 
-            _token = "Bearer " + loginResponse.body.token;
-            _expiresOn = DateTime.Parse(loginResponse.body.expiresOn).AddMinutes(-5);
-            return _token;
+            // Redis'e cache'le (55 dakika)
+            await _distributedCache.SetStringAsync(CACHE_KEY, token, 
+                new DistributedCacheEntryOptions 
+                { 
+                    SlidingExpiration = TimeSpan.FromMinutes(55) 
+                });
+
+            return token;
         }
     }
 }
