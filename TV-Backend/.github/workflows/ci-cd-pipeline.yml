@@ -24,6 +24,10 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
+    defaults:
+      run:
+        working-directory: ./TV-Backend
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -45,9 +49,13 @@ jobs:
           Redis__ConnectionString: localhost:6379
 
   build:
-    needs: test  # ← Test'ten sonra build
+    needs: test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+
+    defaults:
+      run:
+        working-directory: ./TV-Backend
 
     steps:
       - name: Checkout code
@@ -68,7 +76,6 @@ jobs:
           docker tag mervecetin904/tv-backend mervecetin904/tv-backend:latest
           docker push mervecetin904/tv-backend:latest
 
-      # Docker Compose test ekle
       - name: Test Docker Compose
         run: |
           docker-compose up -d --build
