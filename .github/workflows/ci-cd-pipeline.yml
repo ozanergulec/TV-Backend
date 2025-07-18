@@ -78,9 +78,9 @@ jobs:
 
       - name: Test Docker Compose
         run: |
-          docker-compose up -d --build
+          docker compose up -d --build
           sleep 30
           # Health check
           curl -f http://localhost:5000/swagger || exit 1
-          docker-compose down
+          docker compose down
 
