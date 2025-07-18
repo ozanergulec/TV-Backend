@@ -34,7 +34,7 @@ namespace TV_Backend.Tests.Services
             _distributedCacheMock = new Mock<IDistributedCache>();
             _httpMessageHandlerMock = new Mock<HttpMessageHandler>();
 
-            // HttpClient'ı mock handler ile 
+            // HttpClient'ı mock handler ile
             _httpClient = new HttpClient(_httpMessageHandlerMock.Object)
             {
                 BaseAddress = new Uri("https://test-api.example.com/")
@@ -49,10 +49,19 @@ namespace TV_Backend.Tests.Services
 
             // Redis cache mock setup 
             _distributedCacheMock
-                .Setup(x => x.GetStringAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync((string?)null);
+                .Setup(x => x.GetAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync((byte[]?)null);
 
-            // Service instance
+            // SetStringAsync 
+            _distributedCacheMock
+                .Setup(x => x.SetAsync(
+                    It.IsAny<string>(), 
+                    It.IsAny<byte[]>(), 
+                    It.IsAny<DistributedCacheEntryOptions>(), 
+                    It.IsAny<CancellationToken>()))
+                .Returns(Task.CompletedTask);
+
+            // Service instance oluştur
             _service = new SanTsgTokenService(
                 _httpClientFactoryMock.Object, 
                 _configurationMock.Object,
@@ -67,10 +76,10 @@ namespace TV_Backend.Tests.Services
         }
 
         [Fact]
-        public async Task GetTokenAsync_ValidCredentials_ReturnsToken()
+        public async Task GetTokenAsync_NoCache_FetchesNewToken()
         {
             // Arrange
-            var tokenValue = "test-token-123"; 
+            var tokenValue = "test-token-123";
             var loginResponse = new LoginResponse
             {
                 header = new TV_Backend.Models.Login.Header
@@ -81,7 +90,7 @@ namespace TV_Backend.Tests.Services
                 },
                 body = new TV_Backend.Models.Login.Body
                 {
-                    token = tokenValue, 
+                    token = tokenValue,
                     expiresOn = DateTime.UtcNow.AddHours(1).ToString("yyyy-MM-ddTHH:mm:ss"),
                     tokenId = 12345
                 }
@@ -106,6 +115,42 @@ namespace TV_Backend.Tests.Services
 
             // Assert
             result.Should().Be($"Bearer {tokenValue}");
+
+            // Cache'e set edildiğini doğrula
+            _distributedCacheMock.Verify(
+                x => x.SetAsync(
+                    "san_tsg_token",
+                    It.IsAny<byte[]>(),
+                    It.IsAny<DistributedCacheEntryOptions>(),
+                    It.IsAny<CancellationToken>()),
+                Times.Once);
+        }
+
+        [Fact]
+        public async Task GetTokenAsync_WithCache_ReturnsCachedToken()
+        {
+            // Arrange
+            var cachedToken = "Bearer cached-token-123";
+            var tokenBytes = Encoding.UTF8.GetBytes(cachedToken);
+
+            _distributedCacheMock
+                .Setup(x => x.GetAsync("san_tsg_token", It.IsAny<CancellationToken>()))
+                .ReturnsAsync(tokenBytes);
+
+            // Act
+            var result = await _service.GetTokenAsync();
+
+            // Assert
+            result.Should().Be(cachedToken);
+
+            // HTTP call yapılmadığını doğrula
+            _httpMessageHandlerMock
+                .Protected()
+                .Verify<Task<HttpResponseMessage>>(
+                    "SendAsync",
+                    Times.Never(),
+                    ItExpr.IsAny<HttpRequestMessage>(),
+                    ItExpr.IsAny<CancellationToken>());
         }
 
         [Fact]

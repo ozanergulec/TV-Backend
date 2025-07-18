@@ -7,7 +7,7 @@
     <RootNamespace>TV_Backend</RootNamespace>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningsAsErrors />
-    <NoWarn>CS8600;CS8601;CS8602;CS8603;CS8618</NoWarn>
+    <NoWarn>CS8600;CS8601;CS8602;CS8603;CS8618;CS8625;CS7022</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
