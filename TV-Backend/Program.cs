@@ -1,6 +1,7 @@
 using TV_Backend.Services.HotelProduct;
 using TV_Backend.Services;
 using TV_Backend.Services.Booking;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,10 +43,12 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddHttpClient();
 
 // Redis Cache Registration
+var redisConnectionString = builder.Configuration["Redis:ConnectionString"] ?? "localhost:6379";
 builder.Services.AddStackExchangeRedisCache(options =>
 {
-    options.Configuration = builder.Configuration.GetValue<string>("Redis:ConnectionString");
+    options.Configuration = redisConnectionString;
 });
+builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(redisConnectionString));
 
 // Service Registrations 
 builder.Services.AddScoped<HotelProductService>(); 
