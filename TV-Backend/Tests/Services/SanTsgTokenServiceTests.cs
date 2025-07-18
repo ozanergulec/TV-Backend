@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Caching.Distributed;
 using Moq;
 using Moq.Protected;
 using TV_Backend.Models.Login;
@@ -20,18 +21,20 @@ namespace TV_Backend.Tests.Services
     {
         private readonly Mock<IHttpClientFactory> _httpClientFactoryMock;
         private readonly Mock<IConfiguration> _configurationMock;
+        private readonly Mock<IDistributedCache> _distributedCacheMock;
         private readonly Mock<HttpMessageHandler> _httpMessageHandlerMock;
         private readonly HttpClient _httpClient;
         private readonly SanTsgTokenService _service;
 
         public SanTsgTokenServiceTests()
         {
-            // Mock objects oluştur
+            // Mock objects 
             _httpClientFactoryMock = new Mock<IHttpClientFactory>();
             _configurationMock = new Mock<IConfiguration>();
+            _distributedCacheMock = new Mock<IDistributedCache>();
             _httpMessageHandlerMock = new Mock<HttpMessageHandler>();
 
-            // HttpClient'ı mock handler ile oluştur
+            // HttpClient'ı mock handler ile 
             _httpClient = new HttpClient(_httpMessageHandlerMock.Object)
             {
                 BaseAddress = new Uri("https://test-api.example.com/")
@@ -44,8 +47,16 @@ namespace TV_Backend.Tests.Services
             _configurationMock.Setup(x => x["SanTsgApi:User"]).Returns("testuser");
             _configurationMock.Setup(x => x["SanTsgApi:Password"]).Returns("testpass");
 
-            // Service instance oluştur
-            _service = new SanTsgTokenService(_httpClientFactoryMock.Object, _configurationMock.Object);
+            // Redis cache mock setup 
+            _distributedCacheMock
+                .Setup(x => x.GetStringAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync((string?)null);
+
+            // Service instance
+            _service = new SanTsgTokenService(
+                _httpClientFactoryMock.Object, 
+                _configurationMock.Object,
+                _distributedCacheMock.Object);
         }
 
         [Fact]
@@ -59,7 +70,7 @@ namespace TV_Backend.Tests.Services
         public async Task GetTokenAsync_ValidCredentials_ReturnsToken()
         {
             // Arrange
-            var tokenValue = "test-token-123"; // ✅ "Bearer" olmadan sadece token
+            var tokenValue = "test-token-123"; 
             var loginResponse = new LoginResponse
             {
                 header = new TV_Backend.Models.Login.Header
@@ -70,7 +81,7 @@ namespace TV_Backend.Tests.Services
                 },
                 body = new TV_Backend.Models.Login.Body
                 {
-                    token = tokenValue, // ✅ Sadece token, "Bearer" yok
+                    token = tokenValue, 
                     expiresOn = DateTime.UtcNow.AddHours(1).ToString("yyyy-MM-ddTHH:mm:ss"),
                     tokenId = 12345
                 }
@@ -94,7 +105,7 @@ namespace TV_Backend.Tests.Services
             var result = await _service.GetTokenAsync();
 
             // Assert
-            result.Should().Be($"Bearer {tokenValue}"); // ✅ Service "Bearer " ekliyor
+            result.Should().Be($"Bearer {tokenValue}");
         }
 
         [Fact]
@@ -112,7 +123,6 @@ namespace TV_Backend.Tests.Services
                 .ReturnsAsync(httpResponse);
 
             // Act & Assert
-            // ✅ Service HttpRequestException fırlatıyor
             var exception = await Assert.ThrowsAsync<HttpRequestException>(() => _service.GetTokenAsync());
             exception.Message.Should().Contain("401");
         }
@@ -135,7 +145,6 @@ namespace TV_Backend.Tests.Services
                 .ReturnsAsync(httpResponse);
 
             // Act & Assert
-            // ✅ Service JsonException fırlatıyor
             await Assert.ThrowsAsync<JsonException>(() => _service.GetTokenAsync());
         }
     }

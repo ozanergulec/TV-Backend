@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: tv-backend-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - tv-backend-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  tv-backend:
+    build: .
+    container_name: tv-backend-app
+    ports:
+      - "5000:8080"
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - Redis__ConnectionString=redis:6379
+    networks:
+      - tv-backend-network
+    restart: unless-stopped
+
+volumes:
+  redis_data:
+
+networks:
+  tv-backend-network:
+    driver: bridge 
