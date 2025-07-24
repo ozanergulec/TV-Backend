@@ -28,6 +28,11 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - Redis__ConnectionString=redis:6379
+      
+      - SanTsgApi__BaseUrl=${SANTSG_BASE_URL}
+      - SanTsgApi__Agency=${SANTSG_AGENCY}
+      - SanTsgApi__User=${SANTSG_USER}
+      - SanTsgApi__Password=${SANTSG_PASSWORD}
     networks:
       - tv-backend-network
     restart: unless-stopped
